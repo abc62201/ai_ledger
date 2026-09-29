@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 关键：禁止缩放，适配移动端全屏 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI 财务助理</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="js_class.js"></script>
+
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+    <span>AI 财务助理</span>
+    <button class="setting-btn" onclick="openSettings()">⚙</button>
+</div>
+
+<!-- 聊天内容区 -->
+<div class="chat-container" id="chat-box">
+    <div class="message ai">你好！我是你的财务助理。今天有什么收支需要记录吗？</div>
+</div>
+
+<!-- 底部操作区 -->
+<div class="input-area" id="input-area">
+    <!-- 切换按钮：默认是键盘图标，点击变麦克风 -->
+    <div class="mode-btn" id="toggle-mode" onclick="toggleInputMode()">
+        🎤
+    </div>
+
+    <!-- 文本输入框 -->
+    <input type="text" id="chat-input" placeholder="输入记账内容..." onkeypress="handleKeyPress(event)">
+
+    <!-- 语音按钮 (默认隐藏) -->
+    <div class="voice-btn" id="voice-btn">按住 说话</div>
+
+    <!-- 发送按钮 -->
+    <button class="send-btn" onclick="sendMessage()">发送</button>
+</div>
+<div class="set_js" id="set_js">
+    <div class="set_header">
+        <div onclick="closeSettings()">❮</div>
+        <span>AI 财务助理</span>
+        <button class="setting-btn" onclick="openSettings()">⚙</button>
+    </div>
+    <div class="set_cont" id="set_cont">
+
+    </div>
+</div>
+<script src="index.js"></script>
+<script src="ai_set.js"></script>
+<script src="ai_set1.js"></script>
+<script src="ai_set2.js"></script>
+</body>
+</html>

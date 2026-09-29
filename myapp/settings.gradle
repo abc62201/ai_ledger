@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        // 1. 阿里云公共仓库（加速插件下载）
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // 1. 保留阿里云镜像（加速其他库下载）
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+
+        // 2. 关键！必须加上 Maven Central，Vosk 在这里
+        mavenCentral()
+
+        // 3. Google 仓库（Android 官方库）
+        google()
+    }
+}
+
+rootProject.name = "ai个人财务助理" // 保持你原来的项目名
+include ':app'

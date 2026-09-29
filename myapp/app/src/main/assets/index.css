@@ -1,0 +1,517 @@
+ /* --- CSS 样式部分 --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7f8fc; /* 类似千问的淡灰背景 */
+            height: 100vh; /* 强制占满全屏高度 */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* 防止整个页面滚动 */
+        }
+
+        /* 1. 顶部标题栏 */
+.header {
+    height: 50px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.header span {
+    flex: 1;
+    text-align: center;
+}
+
+.setting-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+        /* 2. 中间聊天记录区域 */
+        .chat-container {
+            flex: 1; /* 占据剩余所有空间 */
+            overflow-y: auto; /* 内容多了自动滚动 */
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+/* 聊天气泡基础样式 */
+.message {
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* AI 消息样式 */
+.message.ai {
+    background-color: #f0f2f5; /* 浅灰色背景 */
+    color: #333;
+    align-self: flex-start;
+}
+
+/* 用户消息样式 */
+.message.user {
+    background-color: #6c5ce7; /* 你的主题紫 */
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+}
+/* 正在输入的动画点 */
+.typing-dots::after {
+    content: '...';
+    animation: blink 1.5s infinite;
+}
+@keyframes blink {
+    0% { opacity: .2; }
+    20% { opacity: 1; }
+    100% { opacity: .2; }
+}
+/* --- 核心：记账确认卡片样式 --- */
+.finance-card {
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    width:100%;
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(14px, 4.5vw, 18px);
+    color: #888;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+    width:100%;
+}
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+}
+.card-info h4 { margin: 0 0 4px 0; font-size: 25px; color: #333; }
+.card-info p { margin: 0; font-size: 20px; color: #666; }
+.card-price {
+    font-size: 25px;
+    font-weight: bold;
+    color: #ff4d4f; /* 支出用红色 */
+}
+.card-price.income { color: #52c41a; } /* 收入用绿色 */
+
+/* 底部按钮区（类名已修正为 card-actions） */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    border-top: 1px dashed #eee;
+    padding-top: 12px;
+}
+
+/* 重写按钮（类名已修正为 btn-cancel） */
+.btn-cancel {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+/* 确认按钮（已有，保持不变） */
+.btn-confirm {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #6c5ce7;
+    color: white;
+}
+
+.finance-card.record-snapshot {
+    opacity: 0.5;
+    margin-bottom: 16px;
+    border: 2px dashed #ccc;
+    filter: grayscale(80%);
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+}
+
+.finance-card.record-snapshot:hover {
+    opacity: 0.65;
+    filter: grayscale(50%);
+}
+
+/* 原始记录的标题行特殊样式 */
+.finance-card.record-snapshot .card-header {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
+.finance-card.record-snapshot .card-header span {
+    font-size: 14px;
+    color: #999;
+    font-weight: bold;
+}
+
+/* 原始记录中隐藏按钮区 */
+.finance-card.record-snapshot .card-actions {
+    display: none;
+}
+
+/* --- 2. 编辑表单卡片 --- */
+.finance-card.edit-form {
+    border: 2px solid #6c5ce7;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.15);
+    margin-top: 4px;
+}
+
+
+
+/* 编辑表单的标题行 */
+.finance-card.edit-form .card-header {
+    border-bottom: 1px dashed #6c5ce7;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+}
+
+.finance-card.edit-form .card-header span {
+    font-size: 16px;
+    color: #6c5ce7;
+    font-weight: bold;
+}
+
+/* --- 3. 编辑字段容器 --- */
+/* --- 财务编辑专用样式 (带前缀防冲突) --- */
+
+/* 整个编辑表单的容器 */
+.fin-edit-container {
+    border: 2px solid #6c5ce7; /* 紫色边框强调 */
+    border-radius: 12px;
+    background: #fff;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* 每一行的容器：强制竖排 */
+.fin-edit-row {
+    display: flex;
+    flex-direction: column; /* 竖着排 */
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+/* 标签样式 */
+.fin-edit-row label,
+.fin-edit-half label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px; /* 标签和输入框的距离 */
+    font-weight: bold;
+}
+
+/* 输入框和下拉框通用样式 */
+.fin-edit-input,
+.fin-edit-select {
+    height: 44px; /* 高度加大，方便点击 */
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    width: 100%; /* 撑满父容器 */
+    box-sizing: border-box; /* 防止padding撑破宽度 */
+}
+
+/* 聚焦时的效果 */
+.fin-edit-input:focus,
+.fin-edit-select:focus {
+    border-color: #6c5ce7;
+    background-color: #fff;
+    outline: none;
+}
+
+/* --- 特殊布局：数量和单价并排 --- */
+.fin-edit-row-group {
+    display: flex;
+    flex-direction: row; /* 横排 */
+    justify-content: space-between; /* 两端对齐 */
+    gap: 10px; /* 中间留缝隙 */
+    margin-bottom: 12px;
+}
+
+/* 并排时的每一个半宽容器 */
+.fin-edit-half {
+    flex: 1; /* 各占一半宽度 */
+    display: flex;
+    flex-direction: column; /* 内部还是竖排（标签在上，框在下） */
+}
+
+.btn-cancel, .btn-confirm {
+    flex: 1;                        /* 两个按钮平分宽度 */
+    height: 48px;                   /* 按钮高度 */
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.btn-confirm {
+    background-color: #6c5ce7;      /* 你的主题紫色 */
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+        /* 3. 底部输入区域 */
+        .input-area {
+            background: #fff;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 60px; /* 保证最小高度 */
+            flex-shrink: 0;
+        }
+
+        /* 模式切换按钮 (语音/键盘图标) */
+        .mode-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .mode-btn:active { background: #f0f0f0; }
+
+        /* 文本输入框 */
+        #chat-input {
+            flex: 1;
+            height: 40px;
+            border: 1px solid #eee;
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 0 15px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #chat-input:focus { background: #fff; border-color: #6b52ff; }
+
+        /* 发送按钮 */
+        .send-btn {
+            background: #6b52ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- 语音模式下的样式变化 --- */
+        /* 当处于语音模式时，隐藏输入框，显示按住说话按钮 */
+        .voice-mode #chat-input { display: none; }
+
+        .voice-btn {
+            flex: 1;
+            height: 40px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            display: none; /* 默认隐藏 */
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #333;
+            user-select: none;
+        }
+
+        /* 激活语音模式时显示 */
+        .voice-mode .voice-btn { display: flex; }
+
+        /* 按住说话时的按压效果 */
+        .voice-btn:active { background: #f0f0f0; color: #6b52ff; border-color: #6b52ff; }
+
+
+
+
+
+
+.set_js {
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    /* 用 transform 控制左右滑动 */
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    /* 同时过渡 transform 和 opacity */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.set_js.show {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+
+}
+
+.set_header{
+    height: 50px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    position: relative;
+}
+.set_header span {
+    flex: 1;
+    text-align: center;
+}
+
+.set_menu{
+list-style-type:none;
+font-size:18pt;
+}
+.set_menu li{
+text-align: center;
+background-color:#cccccc;
+ margin:10px 0px 0px 0px;
+}
+
+
+
+/* 容器与滚动 */
+.pay-view-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #fff;
+    padding: 16px;
+}
+
+/* 头部导航 */
+.pay-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.back-arrow {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.pay-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 星期头 */
+.week-row {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.week-row span { width: calc(100% / 7); }
+
+/* 日历网格 */
+.days-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.day-cell {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.day-cell .date-num { font-size: 14px; color: #666; margin-bottom: 4px; }
+.day-cell .date-amount { font-size: 15px; color: #333; }
+
+/* 特殊状态 */
+.day-cell.empty { pointer-events: none; }
+.day-cell.max-amount .date-amount { color: #e53935; font-weight: bold; } /* 红色 */
+.day-cell.min-amount .date-amount { color: #1e88e5; font-weight: bold; } /* 蓝色 */
+.day-cell.active { background-color: #f5f5f5; }
+
+/* 底部汇总 */
+.summary-box {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+}
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 15px;
+}
+.summary-item .icon { font-size: 18px; margin-right: 8px; }
+.summary-item .value { font-weight: bold; color: #333; }
+.summary-item.selected .value.highlight { color: #009688; }
