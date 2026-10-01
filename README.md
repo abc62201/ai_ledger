@@ -100,7 +100,7 @@
 1. 克隆仓库：
 
    ```bash
-   git clone https://gitee.com/abc62201/ai_record.git
+   git clone https://gitee.com/abc62201/ai_ledger.git
    ```
 
 2. 使用 **Android Studio** 打开项目根目录，等待 Gradle 同步完成。
