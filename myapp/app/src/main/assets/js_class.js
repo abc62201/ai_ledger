@@ -370,7 +370,7 @@ class JsHelper {
           this._originalFinanceData = { ...data };
 
           // 预设分类下拉菜单选项
-          const categories = ['餐饮', '交通', '购物', '娱乐', '医疗', '居住', '其他', '工商银行', '建设银行', '个人', '银行'];
+          const categories = ['餐饮', '食品', '娱乐', '家电', '家具', '数码', '首饰','办公用品','通讯','交通','服装','日用品','玩具','宠物','其他','医疗','房租','水费','电费', '燃气费','工商银行', '建设银行', '个人', '银行'];
           const categoryOptions = categories.map(c =>
               `<option value="${c}" ${data.category === c ? 'selected' : ''}>${c}</option>`
           ).join('');
