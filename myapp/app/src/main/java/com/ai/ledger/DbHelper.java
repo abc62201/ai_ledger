@@ -231,4 +231,31 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+
+
+    // ===== DbHelper.java 新增方法（追加到类末尾即可） =====
+
+    /**
+     * 查询指定年份、指定分类的12个月支出/收入汇总
+     * @param year 年份，如 2026
+     * @param category 分类名称，如 "水电"
+     * @param type "支出" 或 "收入"
+     * @return Cursor，包含 month 和 month_total 两列
+     */
+    public Cursor getMonthlyCategoryTotal(int year, String category, String type) {
+        String sql = "SELECT " +
+                "CAST(SUBSTR(timestamp, 6, 2) AS INTEGER) AS month, " +
+                "SUM(total_price) AS month_total " +
+                "FROM finance_records " +
+                "WHERE income_expense = ? " +
+                "AND category = ? " +
+                "AND SUBSTR(timestamp, 1, 4) = ? " +
+                "GROUP BY SUBSTR(timestamp, 6, 2) " +
+                "ORDER BY month ASC";
+
+        return querySql(sql, type, category, String.valueOf(year));
+    }
+
+
+
 }

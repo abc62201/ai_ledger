@@ -10,6 +10,7 @@ function openSettings() {
     set_cont.innerHTML = `
         <ul class="set_menu">
             <li onclick="set_pay()">查看支出</li>
+            <li onclick="set_yearly_summary()">年度汇总</li>
             <li onclick="set_income()">查看收入</li>
             <li onclick="set_loan(0)">欠债情况</li>
             <li onclick="set_loan(1)">债权情况</li>

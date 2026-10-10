@@ -1,0 +1,160 @@
+/* ===== yearly_summary.css（追加到你的样式表中） ===== */
+
+/* 年度汇总容器 */
+.yearly-summary-container {
+    padding: 10px;
+}
+
+/* 头部：年份标题 + 分类下拉 + 收支类型下拉 */
+.yearly-summary-container .pay-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.yearly-summary-container .pay-header .pay-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.yearly-summary-container .pay-header select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #fff;
+}
+
+/* 12个月格子网格 */
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 400px) {
+    .month-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 单个月格子 */
+.month-cell {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.month-cell:active {
+    transform: scale(0.95);
+}
+
+/* 最高值高亮（红色边框） */
+.month-cell.max-month {
+    border-color: #e74c3c;
+    background: #fef0f0;
+}
+
+/* 最低值高亮（绿色边框） */
+.month-cell.min-month {
+    border-color: #27ae60;
+    background: #f0fef0;
+}
+
+.month-cell .month-num {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.month-cell .month-amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.month-cell.max-month .month-amount {
+    color: #e74c3c;
+}
+
+.month-cell.min-month .month-amount {
+    color: #27ae60;
+}
+
+/* 明细视图 */
+.detail-view {
+    padding: 10px;
+}
+
+.detail-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.detail-total {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+.detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.detail-label {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.detail-category {
+    font-size: 12px;
+    color: #999;
+    padding: 2px 8px;
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.detail-amount {
+    font-size: 14px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.detail-rank {
+    font-size: 12px;
+    color: #999;
+    width: 30px;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 14px;
+}

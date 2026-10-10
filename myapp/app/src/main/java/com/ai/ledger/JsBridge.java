@@ -443,4 +443,45 @@ public void stopVoice() {
         }
         return result.toString();
     }
+
+
+
+    // ===== JsBridge.java 新增方法（追加到类末尾即可） =====
+
+    /**
+     * 前端调用：getMonthlyCategoryTotal(2026, "水电", "支出")
+     * 返回 JSON：{"1":150.50, "2":120.30, "3":0, ...}
+     * key=月份(1-12), value=该月该分类的总金额
+     */
+    @JavascriptInterface
+    public String getMonthlyCategoryTotal(int year, String category, String type) {
+        Cursor cursor = DbHelper.getInstance(context)
+                .getMonthlyCategoryTotal(year, category, type);
+        Log.e("JsBridge", "组装修失败: " + year);
+        JSONObject json = new JSONObject();
+        try {
+            int monthCol = cursor.getColumnIndex("month");
+            int totalCol = cursor.getColumnIndex("month_total");
+
+            if (monthCol == -1 || totalCol == -1) {
+                return json.toString();
+            }
+
+            while (cursor.moveToNext()) {
+                int month = cursor.getInt(monthCol);
+                double total = cursor.getDouble(totalCol);
+                json.put(String.valueOf(month), total);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return json.toString();
+    }
+
+
+
 }
